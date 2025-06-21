@@ -1,6 +1,6 @@
 op = []  # 연산자
 nums = []  # 숫자
-
+tmp = []
 
 expression = input()
 
@@ -8,7 +8,8 @@ for i in range(len(expression)):
     if (i % 2 == 1):  # 짝수면
         op.append(expression[i])
     else:
-        if not (expression[i] in nums):
+        if not (expression[i] in tmp):
+            tmp.append(expression[i])
             nums.append([expression[i], 0])
 
 N = len(nums)
