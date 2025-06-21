@@ -37,7 +37,10 @@ def Backtracking():
     global answer
     if (len(calNums) == N):
         result = Cal()
+        if (answer == 0):
+            answer = result
         if (result > answer):
+            print(calNums)
             answer = result
         return
 
