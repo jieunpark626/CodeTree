@@ -8,47 +8,49 @@ for i in range(len(expression)):
     if (i % 2 == 1):  # 짝수면
         op.append(expression[i])
     else:
-        nums.append(expression[i])
-
+        if not (expression[i] in nums):
+            nums.append([expression[i], 0])
 
 N = len(nums)
 
 calNums = []  # 계산할 숫자
 
+def findNum(expression):
+    for i in range(len(nums)):
+        if (nums[i][0] == expression):
+            return nums[i][1]
+
 
 def Cal():
-    numArr = calNums.copy()
+    preNum = findNum(expression[0])
+    for i in range(len(expression)):
+        if (i % 2 == 1):
+            if (expression[i] == "+"):
+                preNum = preNum + findNum(expression[i+1])
+            elif (expression[i] == "-"):
+                preNum = preNum - findNum(expression[i+1])
+            elif (expression[i] == "*"):
+                preNum = preNum * findNum(expression[i+1])
+    return preNum
 
-    for i in range(len(op)):
-        if (op[i] == "+"):
-            numArr[i+1] = numArr[i]+numArr[i+1]
-        elif (op[i] == "-"):
-            numArr[i+1] = numArr[i]-numArr[i+1]
-        elif (op[i] == "*"):
-            numArr[i+1] = numArr[i]*numArr[i+1]
+answer = float('-inf')
 
-    return numArr[N-1]
-
-
-answer = 0
-
-
-def Backtracking():
+def Backtracking(idx):
     global answer
-    if (len(calNums) == N):
+    if (idx == N):
         result = Cal()
-        if (answer == 0):
-            answer = result
+        
         if (result > answer):
-            
             answer = result
+        
         return
 
     for i in range(1, 5):
-        calNums.append(i)
-        Backtracking()
-        calNums.pop()
+        nums[idx][1] = i
+        Backtracking(idx+1)
+        nums[idx][1] = 0
+    return
 
 
-Backtracking()
+Backtracking(0)
 print(answer)
