@@ -40,7 +40,7 @@ def Backtracking():
         if (answer == 0):
             answer = result
         if (result > answer):
-            print(calNums)
+            
             answer = result
         return
 
