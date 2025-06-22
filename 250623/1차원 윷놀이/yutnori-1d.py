@@ -2,36 +2,32 @@ n, m, k = map(int, input().split())  # n : 턴 수, m : 판, k: 말의 수
 nums = list(map(int, input().split()))
 
 arr = []
-hscore = [1] * k # 각 말의 위치
+hscore = [1] * k  # 각 말의 위치
 
 # idx = 턴 수
 answer = 0
+def Cal():
+    score = 0
+    for item in hscore:
+        score += (item>=m)
+    return score
 
-def Choose(idx,score):
-
+def Choose(idx):
     global answer
+    
+    answer = max(answer, Cal())
     if (idx == n):
-        print("fin ",score)
-        for i in range(k):
-            hscore[i] = 1
-        if(answer<score):
-            answer = score
         return
-    canMove = False
+
     for i in range(k):
-        if(hscore[i] < m):
-            canMove = True
-            arr.append(i)
-            hscore[i] += nums[idx]
-            if(hscore[i]>=m):
-                score+=1
-            Choose(idx+1,score)
-            arr.pop()
-    if not canMove:
-        if answer < score:
-            answer = score
-            return
+        if (hscore[i] >= m):
+            continue
+        arr.append(i)
+        hscore[i] += nums[idx]
+        Choose(idx+1)
+        hscore[i] -= nums[idx]
+        arr.pop()
 
 
-Choose(0,0)
+Choose(0)
 print(answer)
