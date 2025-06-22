@@ -6,27 +6,31 @@ hscore = [1] * k # 각 말의 위치
 
 # idx = 턴 수
 answer = 0
+
 def Choose(idx,score):
+
     global answer
     if (idx == n):
-        
+        print("fin ",score)
         for i in range(k):
             hscore[i] = 1
         if(answer<score):
             answer = score
         return
-
+    canMove = False
     for i in range(k):
-        if(hscore[i] >= m):
-            continue
-        arr.append(i)
-        hscore[i] += nums[idx]
-        if(hscore[i]>=m):
-            score+=1
-        
-        
-        Choose(idx+1,score)
-        arr.pop()
+        if(hscore[i] < m):
+            canMove = True
+            arr.append(i)
+            hscore[i] += nums[idx]
+            if(hscore[i]>=m):
+                score+=1
+            Choose(idx+1,score)
+            arr.pop()
+    if not canMove:
+        if answer < score:
+            answer = score
+            return
 
 
 Choose(0,0)
