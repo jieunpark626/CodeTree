@@ -10,10 +10,11 @@ def dfs(node):
     result = []    
     for i in range(1,num[node]+1):
         child = dfs(node+i)
-        
         if(child == -1):
-            return -1
+            continue
         result.append(dfs(node+i)+1)
+    if not result:
+        return -1
     return min(result)
 
 
