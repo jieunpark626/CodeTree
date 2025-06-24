@@ -4,7 +4,7 @@ num = list(map(int,input().split()))
 def dfs(node):
     if(node == n-1): # 끝에 도달
         return 0
-    if(num[node] == 0): # 끝에 도달하지 않았는데 멈추면
+    if(node>=n or num[node] == 0): # 끝에 도달하지 않았는데 멈추면
         return -1 # 실패
     
     result = []    
