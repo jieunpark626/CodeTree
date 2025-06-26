@@ -9,21 +9,17 @@ def Print(answer):
 
 
 def check(idx, arr):
-    for length in range(1, (idx + 1) // 2 + 1): 
-        for start in range(max(0, idx - 2 * length + 1), idx - length + 1):
-            first = arr[start:start + length]
-            second = arr[start + length:start + 2 * length]
-            if first == second:
+    num = (idx+1)//2
+    for length in range(2, num+1):
+        for start in range(0, idx-(2*length)+2):
+            if (arr[start:start+length] == arr[start+length:start+length+length]):
                 return False
     return True
 
-
 suc = False
-
 
 def dfs(idx):
     global suc
-
     if (idx == n):
         suc = True
         Print(answer)
