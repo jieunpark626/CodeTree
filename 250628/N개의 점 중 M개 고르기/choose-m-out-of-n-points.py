@@ -26,10 +26,17 @@ def find_min(idx, cnt):
     global ans
 
     if (cnt == m):
-        ans = min(ans, )
+        ans = min(ans, calc())
+        return
+
+    if(idx == n):
+        return
 
     selected_points.append(points[idx])
     find_min(idx+1, cnt+1)
     selected_points.pop()
 
     find_min(idx+1, cnt)
+
+find_min(0,0)
+print(ans)
