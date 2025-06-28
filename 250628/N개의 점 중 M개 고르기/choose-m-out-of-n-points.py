@@ -18,7 +18,7 @@ def calc():
         dist(p1, p2)
         for i, p1 in enumerate(selected_points)
         for j, p2 in enumerate(selected_points)
-        if i != j
+        if i < j
     ])
 
 
