@@ -1,20 +1,35 @@
-from itertools import combinations
+import sys
+INT_MAX = sys.maxsize
 
-n, m = map(int, input().split())
+n, m = tuple(map(int, input().split()))
 points = [tuple(map(int, input().split())) for _ in range(n)]
 
-combis = list(combinations(points, m))
+ans = INT_MAX
+selected_points = []
 
-dists = []
-for combi in combis:
-    max = 0
-    items = list(combinations(combi, 2))
-    for item in items:
-        x = (item[0][0] - item[1][0]) ** 2
-        y = (item[0][1] - item[1][1]) ** 2
-        result = x+y
-        if (result > max):
-            max = result
-    dists.append(max)
 
-print(min(dists))
+def dist(p1, p2):
+    (x1, y1), (x2, y2) = p1, p2
+    return (x1-x2) ** 2 + (y1-y2) ** 2
+
+
+def calc():
+    return max([
+        dist(p1, p2)
+        for i, p1 in enumerate(selected_points)
+        for j, p2 in enumerate(selected_points)
+        if i != j
+    ])
+
+
+def find_min(idx, cnt):
+    global ans
+
+    if (cnt == m):
+        ans = min(ans, )
+
+    selected_points.append(points[idx])
+    find_min(idx+1, cnt+1)
+    selected_points.pop()
+
+    find_min(idx+1, cnt)
