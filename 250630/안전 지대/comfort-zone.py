@@ -5,7 +5,7 @@ dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
 
 k = 1
-answer = (0, 0)
+answer = (1, 0)
 
 def dfs(x, y):
     for i in range(4):
