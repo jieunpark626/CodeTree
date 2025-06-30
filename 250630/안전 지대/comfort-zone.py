@@ -3,34 +3,41 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 
 dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
+visited = [[False for _ in range(m)] for _ in range(n)]
 
-k = 1
-answer = (1, 0)
+zone_num = 0
 
-def dfs(x, y):
+
+def dfs(x, y, k):
     for i in range(4):
         new_x = x + dx[i]
         new_y = y + dy[i]
-        if (new_x > -1 and new_x < n and new_y > -1 and new_y < m and visited[new_x][new_y] == 0 and grid[new_x][new_y] > k):
-            visited[new_x][new_y] = 1
-            dfs(new_x, new_y)
+        if (new_x > -1 and new_x < n and new_y > -1 and new_y < m and visited[new_x][new_y] == False and grid[new_x][new_y] > k):
+            visited[new_x][new_y] = True
+            dfs(new_x, new_y, k)
 
 
-while (True):
-    num = 0
-    visited = [[0 for _ in range(m)] for _ in range(n)]
+def get_zone_num(k):
+    global zone_num
+    zone_num = 0
+
+    for i in range(n):
+        for j in range(m):
+            visited[i][j] = False
+
     for row in range(n):
         for col in range(m):
-            if (visited[row][col] == 0 and grid[row][col] > k):
-                visited[row][col] = 1
-                num += 1
-                dfs(row, col)
-    if (num == 0):
-        break
-
-    if (num > answer[1]):
-        answer = (k, num)
-    k = k+1
+            if (visited[row][col] == False and grid[row][col] > k):
+                visited[row][col] = True
+                zone_num += 1
+                dfs(row, col, k)
 
 
-print(answer[0], answer[1])
+max_zone_num = -1
+answer_k = 0
+max_height = 100
+for k in range(1, max_height+1):
+    get_zone_num(k)
+    if (zone_num > max_zone_num):
+        max_zone_num, answer_k = zone_num, k
+print(answer_k, max_zone_num)
