@@ -38,7 +38,6 @@ for point in points:
     r, c= point[0]-1,point[1]-1
     
     q.append((r, c))
-    init_visited()
     visited[r][c] = True
     visited_node.add((r,c))
     bfs()
