@@ -26,7 +26,7 @@ def bfs():
 
         if (cur_loc[0] == n-1 and cur_loc[1] == m-1):
             print(route[cur_loc[0]][cur_loc[1]])
-
+            return
         for i in range(3):
             new_x = cur_loc[0] + dx[i]
             new_y = cur_loc[1] + dy[i]
@@ -35,6 +35,6 @@ def bfs():
                 visited[new_x][new_y] = True
                 q.append((new_x, new_y))
                 route[new_x][new_y] = route[cur_loc[0]][cur_loc[1]] + 1
-
+    print(-1)
 q.append((0,0))
 bfs()
