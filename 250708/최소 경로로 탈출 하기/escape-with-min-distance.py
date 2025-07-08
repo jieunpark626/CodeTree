@@ -27,7 +27,7 @@ def bfs():
         if (cur_loc[0] == n-1 and cur_loc[1] == m-1):
             print(route[cur_loc[0]][cur_loc[1]])
             return
-        for i in range(3):
+        for i in range(4):
             new_x = cur_loc[0] + dx[i]
             new_y = cur_loc[1] + dy[i]
 
