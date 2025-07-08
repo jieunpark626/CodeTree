@@ -3,22 +3,30 @@ from collections import deque
 N = int(input())
 
 q = deque()
+visited = deque()
 
 def bfs():
     while q:
-        cur_num_cnt = q.popleft()
+        num, cnt = q.popleft()
 
-        if(cur_num_cnt[0] == 1):
-            print(cur_num_cnt[1])
+        if (num == 1):
+            print(cnt)
             return
         
-        if(cur_num_cnt[0]%3 == 0):
-            q.append((int(cur_num_cnt[0] / 3), cur_num_cnt[1]+1))
-        elif(cur_num_cnt[0]%2==0):
-            q.append((int(cur_num_cnt[0] / 2), cur_num_cnt[1]+1))
-        else:
-            q.append((cur_num_cnt[0] - 1, cur_num_cnt[1]+1))
-            q.append((cur_num_cnt[0] + 1, cur_num_cnt[1]+1))
+        if (num % 3 == 0 and (num//3) not in visited):
+            q.append((num//3, cnt+1))
+            visited.append(num//3)
+        if (num % 2 == 0 and (num//2) not in visited):
+            q.append((num // 2, cnt+1))
+            visited.append(num//2)
+        if ((num-1) not in visited):
+            q.append((num-1, cnt+1))
+            visited.append(num-1)
+        if ((num+1) not in visited):
+            q.append((num+1, cnt+1))
+            visited.append(num+1)
 
-q.append((N,0))
+q.append((N, 0))
+visited.append(N)
+
 bfs()
