@@ -9,7 +9,7 @@ dy = [0, 1, 0, -1]
 
 q = deque()
 visited = [[False for _ in range(n)] for _ in range(n)]
-answer = 0
+answer = 1
 
 def can_go(x,y):
     return x>=0 and x<n and y>=0 and y<n and grid[x][y] == 0 and visited[x][y] == False
@@ -29,6 +29,8 @@ def bfs():
                 answer += 1
                 
 for point in points:
-    q.append((point[0]-1, point[1]-1))
+    q.append(point)
+    visited[point[0]][point[1]] = True
     bfs()
+
 print(answer)
