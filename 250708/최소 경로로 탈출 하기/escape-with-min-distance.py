@@ -12,13 +12,8 @@ route = [[0 for _ in range(m)] for _ in range(n)]
 
 q = deque()
 
-
 def can_go(x, y):
     return x >= 0 and x < n and y >= 0 and y < m and grid[x][y] != 0 and visited[x][y] == False
-
-
-answer = 0
-
 
 def bfs():
     while q:
@@ -36,5 +31,6 @@ def bfs():
                 q.append((new_x, new_y))
                 route[new_x][new_y] = route[cur_loc[0]][cur_loc[1]] + 1
     print(-1)
+
 q.append((0,0))
 bfs()
