@@ -19,23 +19,25 @@ visited = [[False for _ in range(n)] for _ in range(n)]
 route = [[0 for _ in range(n)] for _ in range(n)]
 min_time = 10000
 
-# n
-
-
+def Print(arr):
+    for r in arr:
+        print(r)
+    print()    
+        
 def get_walls():
     for i in range(n):
         for j in range(n):
             if grid[i][j] == 1:
                 walls.append((i, j))
 
-
 def init():
+    q.clear()
     q.append((sx, sy))
     for i in range(n):
         for j in range(n):
             visited[i][j] = False
             route[i][j] = 0
-
+    visited[sx][sy] = True
 
 comb_result = []
 
@@ -67,13 +69,6 @@ def bfs():
                 route[newx][newy] = route[cur_loc[0]][cur_loc[1]] + 1
                 q.append((newx, newy))
     return -1
-
-
-def remove(arr):
-    for i in range(k):
-        x, y = arr[i][0], arr[i][1]
-        grid[x][y] = 0
-
 
 get_walls()
 combinations(0)
