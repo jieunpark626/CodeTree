@@ -42,7 +42,7 @@ def combinations(n, idx):
 
 def sol():
     global comb,selected_edges,result,n
-    for i in range(0,m):
+    for i in range(0,m+1):
         comb.clear()
         selected_edges.clear()
         combinations(i,0)
