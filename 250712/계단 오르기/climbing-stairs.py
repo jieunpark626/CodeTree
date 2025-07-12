@@ -1,22 +1,14 @@
-from collections import deque
+MOD = 10007
 
 n = int(input())
 
 cnt = [0 for _ in range(n+1)]
-q = deque()
-
-
-def dp():
-    while q:
-        cur = q.popleft()
-        if(cur+2<=n):
-            cnt[cur+2] += cnt[cur]
-            q.append(cur+2)
-        if(cur+3<=n):
-            cnt[cur+3]+= cnt[cur]
-            q.append(cur+3)
-        
-q.append(0)
 cnt[0] = 1
-dp()
+
+for i in range(n+1):
+    if i+2 <= n:
+        cnt[i+2] = (cnt[i+2]+cnt[i]) % MOD
+    if i+3 <= n:
+        cnt[i+3] += (cnt[i+3]+cnt[i]) % MOD
+
 print(cnt[n])
