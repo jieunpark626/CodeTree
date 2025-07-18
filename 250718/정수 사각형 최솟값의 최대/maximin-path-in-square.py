@@ -17,7 +17,7 @@ init()
 
 for r in range(1,n):
     for c in range(1,n):
-        dp[r][c] =max( min(grid[r][c], dp[r-1][c]), min(grid[r][c],dp[r][c-1]))
-        
+        #dp[r][c] =max(min(grid[r][c], dp[r-1][c]), min(grid[r][c],dp[r][c-1]))
+        dp[r][c] = min(grid[r][c], max(dp[r-1][c],dp[r][c-1]))
 
 print(dp[n-1][n-1])
