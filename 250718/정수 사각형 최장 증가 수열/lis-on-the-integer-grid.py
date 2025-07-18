@@ -35,30 +35,19 @@ def find_max_loc(arr):
 
 
 def can_go(x, y):
-    return x >= 0 and x < n and y >= 0 and y < n and visited[x][y] == False
+    return x >= 0 and x < n and y >= 0 and y < n
 
-
-def bfs():
-    while (q):
-        cur_loc = q.popleft()
-        cx, cy = cur_loc[0], cur_loc[1]
-        for i in range(4):
-            nx, ny = cx + dx[i], cy+dy[i]
-            if (can_go(nx, ny) and grid[nx][ny] < grid[cx][cy] and dp[nx][ny]<dp[cx][cy]+1):
-                visited[nx][ny] = True
-                dp[nx][ny] = dp[cx][cy]+1
-                q.append((nx, ny))
 answer = 0
-for r in range(n):
-    for c in range(n):
-        init()
-        q.append((r, c))
-        dp[r][c] = 1
-        visited[r][c] = True
-        bfs()
-        find_max_loc(dp)
-        
-        if(dp[max_loc[0]][max_loc[1]] > answer):
-            answer = dp[max_loc[0]][max_loc[1]]
-            
-print(answer)
+dp[0][0] = 1
+for cx in range(0, n):
+    for cy in range(0, n):
+        for i in range(4):
+            if(dp[cx][cy] == 0):
+                dp[cx][cx] = 1
+            nx, ny = cx + dx[i], cy+dy[i]
+            if (can_go(nx, ny) and grid[nx][ny] > grid[cx][cy]):
+                dp[nx][ny] = max(dp[cx][cy]+1, dp[nx][ny])
+
+
+find_max_loc(dp)                
+print(dp[max_loc[0]][max_loc[1]])
